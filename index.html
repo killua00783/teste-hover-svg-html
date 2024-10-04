@@ -1,53 +1,250 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de Amei</title>
+    <title>Perfil EcoSanea</title>
+    <link rel="shortcut icon" href="imagens/4995402-gota-d-agua-com-meia-folha-e-onda-d-agua-gratis-vetor-removebg-preview.png">
+    
+    <!-- Estilos modernizados -->
     <style>
-        /* Estilo para o botão de Amei */
-        button {
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            background-color: #eef7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header de perfil */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile-header h1 {
+            font-size: 28px;
+            color: #58af9b;
+            display: inline-block;
+        }
+
+        .profile-header h1:last-child {
+            color: #85c4f8;
+        }
+
+        .profile-header svg {
+            margin-left: 10px;
+            fill: #85c4f8;
+        }
+
+        /* Informações pessoais */
+        .bio {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .img_container {
+            flex: 1;
+        }
+
+        .img_container img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .bio-info {
+            flex: 2;
+        }
+
+        .bio-info p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .bio-info h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* Denúncias */
+        .posts h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #58af9b;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .post1 {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .post1 h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .post1 h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #777;
+        }
+
+        .post1 p {
             font-size: 16px;
-            padding: 10px 20px;
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Likes */
+        .likes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .like svg {
+            cursor: pointer;
+            fill: #999;
+            transition: all 0.3s;
+        }
+
+        .like svg:hover,
+        .liked svg {
+            fill: #ff6961;
+        }
+
+        /* Botão voltar */
+        .voltar {
+            width: 30px;
+            margin-bottom: 20px;
             cursor: pointer;
         }
 
-        /* Estilo para o contador */
-        #contador {
-            font-size: 18px;
-            margin-top: 10px;
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .bio {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .img_container {
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<h1>Post no Blog</h1>
-<p>Este é um exemplo de um post. Clica no botão "Amei" para mostrar que gostaste!</p>
+    <div class="container">
+        <!-- Ícone voltar -->
+        <a href="principal.html">
+            <svg class="voltar" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+        </a>
 
-<!-- Botão de Amei -->
-<button id="botaoAmei" onclick="contabilizarAmei()">❤️ Amei</button>
+        <!-- Header do perfil -->
+        <div class="profile-header">
+            <img src="imagens/EcoSanea-removebg-preview.png" class="profile-picture" alt="EcoSanea">
+            <h1>Eco</h1>
+            <h1>Sanea</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars"
+                viewBox="0 0 16 16">
+                <path
+                    d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+            </svg>
+        </div>
 
-<!-- Contador de Amei -->
-<p id="contador">0 pessoas amaram este post.</p>
+        <!-- Informações pessoais -->
+        <div class="bio">
+            <div class="img_container">
+                <img src="imagens/close-up-confident-male-employee-white-collar-shirt-smiling-camera-standing-self-assured-against-studio-background.jpg" alt="João Silva">
+            </div>
+            <div class="bio-info">
+                <h2>João Silva</h2>
+                <p>Santa Catarina, Brasil</p>
+                <p>Olá! Sou João, gosto de programar, viajar e explorar novos lugares.</p>
+            </div>
+        </div>
 
-<script>
-    // Variável para armazenar o número de "Amei"
-    let numeroDeAmeis = 0;
+        <!-- Denúncias -->
+        <div class="posts">
+            <h3>Denúncias</h3>
 
-    // Função que contabiliza o "Amei" quando o botão é clicado
-    function contabilizarAmei() {
-        // Incrementa o número de amei
-        numeroDeAmeis++;
+            <div class="post1">
+                <h1>João Silva</h1>
+                <h2>Bairro Garcia, Rua Ascurra</h2>
+                <p>A distribuição de água potável é irregular e muitas vezes insuficiente. Há moradores que enfrentam
+                    longos períodos sem acesso a água tratada, o que força o uso de fontes não seguras, colocando a
+                    saúde da população em risco.</p>
+                <div class="likes">
+                    <p><b>Likes:</b> <span id="contador-likes">0</span></p>
+                    <div class="like" onclick="curtir()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
-        // Atualiza o texto do contador no front-end
-        const contador = document.getElementById("contador");
-        contador.textContent = `${numeroDeAmeis} ${numeroDeAmeis === 1 ? 'pessoa amou' : 'pessoas amaram'} este post.`;
-    }
-</script>
+            <!-- Mais posts... -->
+        </div>
+    </div>
 
+    <!-- Funções de JavaScript -->
+    <script>
+        let likes = 0;
+
+        function curtir() {
+            likes++;
+            document.getElementById('contador-likes').textContent = likes;
+        }
+    </script>
 </body>
+
 </html>
