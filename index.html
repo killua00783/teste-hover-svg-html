@@ -51,6 +51,7 @@
             font-size: 28px;
             color: #58af9b;
             display: inline-block;
+            text-align: center;
         }
 
         .profile-header h1:last-child {
@@ -190,6 +191,7 @@
         <!-- Header do perfil -->
         <div class="profile-header">
             <img src="EcoSanea-removebg-preview.png" class="profile-picture" alt="EcoSanea">
+            <div class="h2flex">
             <h1>Eco</h1>
             <h1>Sanea</h1>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars"
@@ -197,6 +199,7 @@
                 <path
                     d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
             </svg>
+            </div>
         </div>
 
         <!-- Informações pessoais -->
@@ -234,17 +237,132 @@
 
             <!-- Mais posts... -->
         </div>
-    </div>
 
-    <!-- Funções de JavaScript -->
-    <script>
-        let likes = 0;
+        <!-- Funções de JavaScript -->
+         
+        <script>
+            //lista denuncias teste para aparecer
+            document.addEventListener('DOMContentLoaded', () => {
+        fetch('http://localhost:3000/api/denuncia')
+            .then(response => response.json())
+            .then(denunciasDoBanco => {
+                const listaDoFront = document.getElementById('lista-denuncias');
+                for(i=0; i<denunciasDoBanco.length; i++){
+                    const denuncia = denunciasDoBanco[i]
+                    const postDenuncia = document.createElement('div');
+                    postDenuncia.className = 'post1';
+                    
+                    post1.innerHTML = `
+                  <div class="post1">
+            <h1 class="locations">${denuncia.autor}</h1>
+            <h2 class="locations">${denuncia.localizacao}</h2>
+            <p id="mensagem">${denuncia.descricao}</p>
 
-        function curtir() {
-            likes++;
-            document.getElementById('contador-likes').textContent = likes;
-        }
-    </script>
+            <div class="likes">
+                    <p><b>Likes:</b> <span id="contador-likes">0</span></p>
+                    <div class="like" onclick="curtir()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+                        </svg>
+                    </div>
+                </div>
+        </div>
+                                    `;
+                    
+                        listaDenuncia.appendChild(post1);
+                    }})
+                .catch(error => {
+                    console.error('Erro ao buscar Denuncia:', error);
+                });
+        });
+
+            </script>
+
+            <script>
+                const elementos = document.getElementsByClassName('like');
+                let likes = 0;
+
+                // Atualiza o número de likes no elemento de contador
+                function atualizarContador() {
+                    document.getElementById('contador-likes').textContent = likes;
+                }
+
+                for (let i = 0; i < elementos.length; i++) {
+                    const elemento = elementos.item(i);
+                    elemento.addEventListener('click', () => {
+                        elemento.classList.toggle('liked');
+
+                        if (elemento.classList.contains('liked')) {
+                            curtir(); // Incrementa o número de likes
+                        } else {
+                            descurtir(); // Decrementa o número de likes
+                        }
+                        atualizarContador(); // Atualiza a exibição no front-end
+                    });
+                }
+
+                function curtir() {
+                    likes++; // Incrementa o valor de likes
+                    console.log('Likes: ' + likes);
+                }
+
+                function descurtir() {
+                    if (likes > 0) { // Garante que os likes não fiquem negativos
+                        likes--;
+                    }
+                    console.log('Likes: ' + likes);
+                }
+
+                // Inicializar a contagem de likes no front-end
+                atualizarContador();
+            </script>
+
+            <script>
+                //fetch inicio testes
+
+                document.getElementById('botao').addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita o envio padrão do formulário
+
+                    // Obtém os valores dos campos do formulário
+                    const autor = document.getElementById('autor').value;
+                    const denuncia = document.getElementById('denuncia').value;
+
+                    // Cria o objeto de dados a ser enviado
+                    const dados = {
+                        autor: autor,
+                        denuncia: denuncia,
+                    };
+
+                    // Envia os dados para o back-end usando Fetch API
+                    fetch('http://localhost:3000/like', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dados)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Adiciona no local storage
+                            localStorage.setItem("like", data)
+                            //alert('Bem vindo ao Ecosanea');
+                        })
+                        .catch(error => {
+                            //console.error('Houve um problema com a solicitação:a', error.message);
+                            //alert('Usuario não existe');
+                        });
+                });
+            </script>
+
+            <script>
+                //storage
+                const usuario = localStorage.getItem("usuario")
+
+                const like = localStorage.getItem("like")
+            </script>
+        </div>
+    
 </body>
 
 </html>
